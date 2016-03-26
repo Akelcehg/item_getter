@@ -2,33 +2,41 @@
     <header class="site-header">
         <div class="container sp-cont">
             <div class="site-logo">
-                <h1><a href="index.html"><img src="img/logo.png" alt="Logo"></a></h1>
+                <h1><a href="/"><img src="img/logo.png" alt="Logo"></a></h1>
                 <!--<span class="site-tagline">Buying or Selling,<br>just got easier!</span>-->
             </div>
             <div class="header-right">
+                <div class="user-login-panel">
+                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">Войти</a>
+                    <a href="/signup" class="btn btn-primary btn-sm">Зарегестрироваться</a>
+                </div>
+    <!--            <a href="#" class="visible-sm visible-xs" id="menu-toggle" style="display: none;"><i
+                        class="fa fa-bars"></i></a>-->
+            </div>
+            <!--<div class="header-right">
                 <div class="user-login-panel">
                     <a href="#" class="user-login-btn" data-toggle="modal" data-target="#loginModal"><i
                             class="icon-profile"></i></a>
                 </div>
                 <div class="topnav dd-menu">
                     <ul class="top-navigation sf-menu">
-                        <li><a href="results-list.html">Buy</a></li>
+                            <li><a href="results-list.html">Buy</a></li>
                         <li><a href="add-listing-pricing.html">Sell</a></li>
                         <li><a href="joinus.html">Join</a></li>
                     </ul>
                 </div>
-            </div>
+            </div>-->
         </div>
     </header>
     <!-- End Site Header -->
     <div class="navbar">
         <div class="container sp-cont">
-            <div class="search-function">
+            <!--<div class="search-function">
                 <a href="#" class="search-trigger">
                     <i class="fa fa-search"></i> Найти автомобиль
                 </a>
-                <!--<span><i class="fa fa-phone"></i> Call us <strong>1800 011 2211</strong> <em>or</em> search</span>-->
-            </div>
+                &lt;!&ndash;<span><i class="fa fa-phone"></i> Call us <strong>1800 011 2211</strong> <em>or</em> search</span>&ndash;&gt;
+            </div>-->
             <a href="#" class="visible-sm visible-xs" id="menu-toggle"><i class="fa fa-bars"></i></a>
             <!-- Main Navigation -->
             <nav class="main-navigation dd-menu toggle-menu" role="navigation">
@@ -107,7 +115,8 @@
                                                                                      alt=""> <span>Coupe</span></a>
                                                 </li>
                                                 <li><a href="results-list.html"><img
-                                                        src="img/body-types/convertible.png" alt=""> <span>Convertible</span></a>
+                                                        src="img/body-types/convertible.png" alt="">
+                                                    <span>Convertible</span></a>
                                                 </li>
                                                 <li><a href="results-list.html"><img
                                                         src="img/body-types/crossover.png" alt="">
@@ -398,9 +407,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
+
                                     <div class="col-md-12">
-                                        <input type="submit" class="btn btn-block btn-info btn-lg"
-                                               value="Find my vehicle now">
+
+                                        <a href="#" class="search-trigger btn btn-info ">
+                                            закрыть
+                                        </a>
+
+                                        <button type="submit" class="btn btn-info">Find my vehicle now</button>
+
                                     </div>
                                 </div>
                             </div>

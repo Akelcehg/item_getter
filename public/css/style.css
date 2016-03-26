@@ -6594,10 +6594,12 @@ h1.page-title {
         padding: 20px;
         padding-bottom: 20px;
     }
+    /*
 
     .floated .search-advanced-trigger {
         display: none;
     }
+    */
 
     .floated .search-form-inner .label {
         display: none;

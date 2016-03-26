@@ -511,7 +511,7 @@ jQuery(function ($) {
         AUTOSTARS.IsoTope();
         AUTOSTARS.StickyHeader();
         AUTOSTARS.heroflex();
-        AUTOSTARS.Password();
+        /*AUTOSTARS.Password();*/
         AUTOSTARS.pricingTable();
         AUTOSTARS.MobileMenu();
         $('.selectpicker').selectpicker({container: 'body'});
@@ -576,6 +576,15 @@ jQuery(function ($) {
             return false;
         });
         $(".search-trigger").on("click", function () {
+            $(".search-form").slideToggle();
+            return false;
+        });
+        /*$(".search-trigger").on("click", function () {
+            $(".search-form").slideToggle();
+            return false;
+        });*/
+
+        $(".search-advanced-trigger.main").on("click", function () {
             $(".search-form").slideToggle();
             return false;
         });

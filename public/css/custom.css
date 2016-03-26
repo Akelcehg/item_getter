@@ -1,0 +1,11 @@
+.search-advanced-trigger{
+    font-size: 18px;
+    background-color: #4a89dc;
+    color: white;
+    padding: 10px;
+}
+
+.search-advanced-trigger:hover{
+    color: white;
+    background-color: #4f94ed;
+}
