@@ -2579,7 +2579,10 @@ body.boxed .body {
 }
 
 .search-trigger {
-    width: 52px;
+    /*width: 52px;*/
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
     height: 52px;
     line-height: 52px;
     float: right;
