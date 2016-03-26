@@ -11,7 +11,7 @@ mail.address.reply              : your@yourwebsite.com
 mail.address.bcc                :
 
 //Minification configuration
-allow-compile-html : true
-auto-vendor-prefixes : true
-allow-compile-script : true
-allow-compile-style : true
+allow-compile-html : false
+auto-vendor-prefixes : false
+allow-compile-script : false
+allow-compile-style : false
