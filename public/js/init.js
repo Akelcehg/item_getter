@@ -575,10 +575,18 @@ jQuery(function ($) {
             $(".by-type-options").slideToggle();
             return false;
         });
+
         $(".search-trigger").on("click", function () {
             $(".search-form").slideToggle();
             return false;
         });
+
+        $(".close-formm").on("click", function () {
+            $(".search-form").slideToggle();
+            return false;
+        });
+
+
         /*$(".search-trigger").on("click", function () {
             $(".search-form").slideToggle();
             return false;
@@ -642,6 +650,7 @@ jQuery(function ($) {
             AUTOSTARS.RESULTS();
         }
         //* Advanced Search Trigger
+/*
         $('.search-advanced-trigger').on("click", function () {
             if ($(this).hasClass('advanced')) {
                 $(this).removeClass('advanced');
@@ -655,6 +664,7 @@ jQuery(function ($) {
             }
             return false;
         });
+*/
 
         $("#Show-Filters").on("click", function () {
             $("#Search-Filters").slideToggle();
