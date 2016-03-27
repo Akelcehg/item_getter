@@ -36,12 +36,13 @@
                 </div>
                 <div class="col-md-4">
                     <section class="signup-form sm-margint">
-                        <form>
+                        <form action="/signup" method="POST">
                             <!-- Regular Signup -->
                             <div class="regular-signup">
                                 <h3>Create an account</h3>
-                                <input type="email" class="form-control" placeholder="Enter your email">
-                                <input type="password" class="form-control password-input margin-5" placeholder="Type your password"/>
+                                <input type="email" name="email" class="form-control" placeholder="Enter your email">
+
+                                <input type="password" name="password" class="form-control password-input margin-5" placeholder="Type your password"/>
 
                                 <!--<a href="javascript:void(0);" class="password-generate pass-actions"><i class="fa fa-refresh"></i></a>-->
                                 <!--<div class="progress"><div class="progress-bar password-output" style="width: 0%"></div></div>-->

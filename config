@@ -15,3 +15,7 @@ allow-compile-html : false
 auto-vendor-prefixes : false
 allow-compile-script : false
 allow-compile-style : false
+
+
+//DB
+database                       : mongodb://localhost:27017/item_manager
