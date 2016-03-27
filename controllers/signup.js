@@ -5,20 +5,30 @@ exports.install = function() {
 
 function view_signup() {
     var self = this;
-    var Users = MODEL('users').schema;
 
-    Users.find(function(err, users) {
+    /*Users.find(function(err, users) {
         console.log (err);
         console.log (users);
-    });
+    });*/
 
-    
+    console.log (self.body);
+
     self.view('signup');
 }
 
 function json_signup() {
     var self = this;
-    console.log(self.body);
-    self.repository.isSuccess = true;
-    self.view('signup', self.body);
+    var Users = MODEL('users').schema;
+    var userFormData = {
+        'email' : self.body.email,
+        'password' : self.body.password
+    };
+
+    var userData = new Users(userFormData);
+
+    if (userData.validateSync()){
+        console.log ("Has errors");
+        self.json(userData.validateSync());
+    } else self.json({ r: true });
+
 }
