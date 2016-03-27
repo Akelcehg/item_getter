@@ -1,47 +1,18 @@
-F.on('module#auth', function (type, name) {
-    var auth = MODULE('auth');
-    auth.onAuthorize = function (id, callback, flags) {
+framework.on('module#auth', function(type, name) {
+    MODULE('auth').onAuthorize = function(id, callback) {
 
-        // - this function is cached
-        // - here you must read user information from a database
-        // - insert the user object into the callback (this object will be saved to session/cache)
-        callback({id: '1', alias: 'Peter Sirka', roles: ['admin']});
+        // this is cached
+        // read user information from database
+        // into callback insert the user object (this object is saved to session/cache)
+        // this is an example
 
+        // Why "1"? Look into auth.login(controller, "ID", user);
+        if (id === '1')
+            return callback({ id: '1', alias: 'Peter Sirka' });
+
+        callback(null);
         // if user not exist then
         // callback(null);
     };
+
 });
-
-// Documentation: http://docs.totaljs.com/Framework/#framework.on('controller')
-F.on('controller', function (self, name) {
-
-    var user = self.user;
-    if (user === null)
-        return;
-
-    var length = user.roles.length;
-    for (var i = 0; i < length; i++) {
-
-        var role = '!' + user.roles[i];
-        if (self.flags.indexOf(role) === -1) {
-
-            // cancel executing of controller
-            self.cancel();
-
-            // redirect
-            self.redirect('/you-do-not-have-permission/')
-            return;
-        }
-
-    }
-});
-
-
-/*
- *
- * exports.install = function() {
- F.route('/admin/', view_admin, ['!admin', '!moderator']);
- F.route('/admin/manage/', view_admin, ['!admin']);
- };
- *
- * */

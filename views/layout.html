@@ -14,12 +14,12 @@
 
 
     @{css('bootstrap.css',
-        'bootstrap-theme.css',
-        'style.css',
-        'vendor/prettyphoto/css/prettyPhoto.css',
-        'vendor/owl-carousel/css/owl.carousel.css',
-        'vendor/owl-carousel/css/owl.theme.css',
-        '/colors/color5.css'
+    'bootstrap-theme.css',
+    'style.css',
+    'vendor/prettyphoto/css/prettyPhoto.css',
+    'vendor/owl-carousel/css/owl.carousel.css',
+    'vendor/owl-carousel/css/owl.theme.css',
+    '/colors/color5.css'
     )}
 
     <!--[if lte IE 9]>
@@ -63,42 +63,43 @@
                 <h4>Login to your account</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="#" method="post" id="loginForm">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Login">
+                    <div id="error"></div>
+                    <input type="button" id="modalLoginButton" class="btn btn-primary" value="Авторизоваться">
                 </form>
             </div>
-            <div class="modal-footer">
+            <!--<div class="modal-footer">
                 <button type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i> Login
                     with Facebook
                 </button>
                 <button type="button" class="btn btn-block btn-twitter btn-social"><i class="fa fa-twitter"></i> Login
                     with Twitter
                 </button>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
 @{js('modernizr.js','jquery-2.0.0.min.js',
-    'vendor/prettyphoto/js/prettyphoto.js',
-    'ui-plugins.js',
-    'helper-plugins.js',
-    'vendor/prettyphoto/js/prettyphoto.js',
-    'vendor/owl-carousel/js/owl.carousel.min.js',
-    <!--'vendor/password-checker.js',-->
-    'bootstrap.js',
-    'init.js',
-    'vendor/flexslider/js/jquery.flexslider.js',
-    'vendor/flexslider/js/jquery.flexslider.js',
-    'scripts.js'
-    )}
+'vendor/prettyphoto/js/prettyphoto.js',
+'ui-plugins.js',
+'helper-plugins.js',
+'vendor/prettyphoto/js/prettyphoto.js',
+'vendor/owl-carousel/js/owl.carousel.min.js',
+<!--'vendor/password-checker.js',-->
+'bootstrap.js',
+'init.js',
+'vendor/flexslider/js/jquery.flexslider.js',
+'vendor/flexslider/js/jquery.flexslider.js',
+'scripts.js'
+)}
 
 
 <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->

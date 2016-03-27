@@ -12,4 +12,18 @@ $(document).ready(function () {
 
         });
     });
+
+    $('#modalLoginButton').bind('click', function () {
+
+        $.post('/login/?ts=' + new Date().getTime(), $('#loginForm').serialize(), function (response) {
+            var errorDiv = $('#error');
+            errorDiv.empty();
+            if (response.errors) {
+                for (var key in response.errors) {
+                    errorDiv.append('<div>' + response.errors[key].message + '</div>');
+                }
+            } else window.location.href = '/';
+
+        });
+    });
 });

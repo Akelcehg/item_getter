@@ -1,49 +1,61 @@
-exports.install = function () {
-    F.route('/xhr/login/', json_login, ['unauthorize']);
-    F.route('/xhr/logoff/', json_logoff, ['authorize']);
-    //F.route('/', view_authorize, ['authorize']);
+exports.install = function() {
+//    framework.route('/', view_homepage);
+//    framework.route('/', view_profile, ['authorize']);
+//    framework.route('/usage/', view_usage);
+    framework.route('/login/', json_login, ['xhr', 'post']);
+    framework.route('/logoff/', json_logoff, ['authorize']);
 };
 
-function json_login() {
+// Homepage & login form
+// GET, [unlogged]
+function view_homepage() {
+    var self = this;
+    self.view('homepage');
+}
 
+// User profile
+// GET, [logged]
+function view_profile() {
+    var self = this;
+    self.json(self.user);
+
+    // in a view @{user.alias}
+}
+
+// Framework usage
+// GET
+function view_usage() {
+    var self = this;
+    self.plain(framework.usage(true));
+}
+
+// Login process
+// POST, [xhr, unlogged]
+function json_login() {
     var self = this;
     var auth = MODULE('auth');
 
     // read user information from database
     // this is an example
-    var user = {id: '1', alias: 'Peter'};
+    var user = { id: '1', alias: 'Peter Sirka' };
 
     // create cookie
     // save to session
-    // @controller {Controller}
-    // @id {String}
-    // @user {Object}
     auth.login(self, user.id, user);
 
-    self.json({r: true});
+    self.json({ r: true });
 }
 
+// Logoff process
+// POST, [+xhr, logged]
 function json_logoff() {
-
     var self = this;
     var auth = MODULE('auth');
     var user = self.user;
 
     // remove cookie
     // remove user session
-    // @controller {Controller}
-    // @id {String}
     auth.logoff(self, user.id);
 
-    self.json({r: true});
-}
-
-function view_authorize() {
-    var self = this;
-    var user = self.user;
-
-    // user.id
-    // user.alias
-
-    self.view('profile');
+    self.redirect('/');
 }
