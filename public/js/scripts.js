@@ -8,7 +8,7 @@ $(document).ready(function () {
                 for (var key in response.errors) {
                     errorDiv.append('<div>' + response.errors[key].message + '</div>');
                 }
-            }
+            } else window.location.href = '/';
 
         });
     });

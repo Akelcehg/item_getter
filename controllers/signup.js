@@ -18,6 +18,7 @@ function view_signup() {
 
 function json_signup() {
     var self = this;
+    
     var Users = MODEL('users').schema;
     var userFormData = {
         'email' : self.body.email,
@@ -29,6 +30,8 @@ function json_signup() {
     if (userData.validateSync()){
         console.log ("Has errors");
         self.json(userData.validateSync());
-    } else self.json({ r: true });
+    } else {
+        return self.transfer("/");
+    }
 
 }

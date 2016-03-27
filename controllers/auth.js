@@ -1,7 +1,7 @@
 exports.install = function () {
     F.route('/xhr/login/', json_login, ['unauthorize']);
     F.route('/xhr/logoff/', json_logoff, ['authorize']);
-    F.route('/', view_authorize, ['authorize']);
+    //F.route('/', view_authorize, ['authorize']);
 };
 
 function json_login() {
