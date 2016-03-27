@@ -1,47 +1,39 @@
 <!DOCTYPE HTML>
 <html class="no-js">
 <head>
-    <!-- Basic Page Needs
-      ================================================== -->
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>AutoStars - Responsive Car Dealership Template</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <!-- Mobile Specific Metas
-      ================================================== -->
+
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <!-- CSS
-      ================================================== -->
-    <!--<link href="css/bootstrap.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">-->
+
 
     @{css('bootstrap.css',
         'bootstrap-theme.css',
         'style.css',
         'vendor/prettyphoto/css/prettyPhoto.css',
         'vendor/owl-carousel/css/owl.carousel.css',
-        'vendor/owl-carousel/css/owl.theme.css'
+        'vendor/owl-carousel/css/owl.theme.css',
+        'colors/color5.css'
     )}
 
-    <!--<link href="vendor/prettyphoto/css/prettyPhoto.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="vendor/owl-carousel/css/owl.carousel.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="vendor/owl-carousel/css/owl.theme.css" rel="stylesheet" type="text/css">-->
     <!--[if lte IE 9]>
     <link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
     <link href="css/custom.css" rel="stylesheet" type="text/css"><!-- CUSTOM STYLESHEET FOR STYLING -->
     <!-- Color Style -->
-    <link href="colors/color5.css" rel="stylesheet" type="text/css">
+    <!--<link href="colors/color5.css" rel="stylesheet" type="text/css">-->
     <!-- SCRIPTS
       ================================================== -->
-    <script src="js/modernizr.js"></script><!-- Modernizr -->
+    <!--<script src="js/modernizr.js"></script>-->
 </head>
 
 
-<body class="boxed">
+<body class="">
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser
     today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better
@@ -49,157 +41,7 @@
 <![endif]-->
 <div class="body">
 
-
     @{view('partials/header')}
-    <div class="hero-area">
-        <!-- Search Form -->
-        <div class="floated">
-            <div class="search-form">
-                <h2>Looking for a used or new car?</h2>
-                <p>Our range of vehicles is capable of finding every possible car you like to buy.</p>
-
-                <div class="search-form-inner">
-                    <form>
-                        <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" placeholder="Enter zip, model, make..">
-                        	<span class="input-group-btn">
-        						<button class="btn btn-primary" type="button">Search</button>
-      						</span>
-                        </div>
-
-                        <span class="label label-warning pull-right">Всего 519000 </span>
-                        <span class="label label-warning pull-right">За сегодня 1900 </span>
-                        <span class="label label-success pull-right">За час 230 </span>
-
-                        <a href="#" class="search-advanced-trigger main">Расширенный поиск <i class="fa fa-arrow-down"></i></a>
-
-                        <!--<a href="#" class="search-trigger">
-                            <i class="fa fa-search"></i> Найти автомобиль
-                        </a>-->
-                        <!--<div class="row advanced-search-row" style="display: none;">
-                            <div class="col-md-3">
-                                <label>Postcode</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-md-3">
-                                <label>Body Type</label>
-                                <select name="Body Type" class="form-control selectpicker" style="display: none;">
-                                    <option selected="">Any</option>
-                                    <option>Wagon</option>
-                                    <option>Minivan</option>
-                                    <option>Coupe</option>
-                                    <option>Crossover</option>
-                                    <option>Van</option>
-                                    <option>SUV</option>
-                                    <option>Minicar</option>
-                                    <option>Sedan</option>
-                                </select><div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" title="Any"><span class="filter-option pull-left">Any</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="visibility: hidden;"><ul class="dropdown-menu inner selectpicker" role="menu" style="visibility: hidden;"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">Any</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">Wagon</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">Minivan</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">Coupe</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">Crossover</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">Van</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="6"><a tabindex="0" class="" style=""><span class="text">SUV</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="7"><a tabindex="0" class="" style=""><span class="text">Minicar</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="8"><a tabindex="0" class="" style=""><span class="text">Sedan</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Make</label>
-                                <select name="Make" class="form-control selectpicker" style="display: none;">
-                                    <option selected="">Any</option>
-                                    <option>Jaguar</option>
-                                    <option>BMW</option>
-                                    <option>Mercedes</option>
-                                    <option>Porsche</option>
-                                    <option>Nissan</option>
-                                    <option>Mazda</option>
-                                    <option>Acura</option>
-                                    <option>Audi</option>
-                                    <option>Bugatti</option>
-                                </select><div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" title="Any"><span class="filter-option pull-left">Any</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="visibility: hidden;"><ul class="dropdown-menu inner selectpicker" role="menu" style="visibility: hidden;"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">Any</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">Jaguar</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">BMW</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">Mercedes</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">Porsche</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">Nissan</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="6"><a tabindex="0" class="" style=""><span class="text">Mazda</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="7"><a tabindex="0" class="" style=""><span class="text">Acura</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="8"><a tabindex="0" class="" style=""><span class="text">Audi</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="9"><a tabindex="0" class="" style=""><span class="text">Bugatti</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Model</label>
-                                <select name="Model" class="form-control selectpicker" style="display: none;">
-                                    <option selected="">Any</option>
-                                    <option>GTX</option>
-                                    <option>GTR</option>
-                                    <option>GTS</option>
-                                    <option>RLX</option>
-                                    <option>M6</option>
-                                    <option>S Class</option>
-                                    <option>C Class</option>
-                                    <option>B Class</option>
-                                    <option>A Class</option>
-                                </select><div class="btn-group bootstrap-select form-control"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" title="Any"><span class="filter-option pull-left">Any</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="visibility: hidden;"><ul class="dropdown-menu inner selectpicker" role="menu" style="visibility: hidden;"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">Any</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">GTX</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">GTR</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">GTS</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">RLX</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">M6</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="6"><a tabindex="0" class="" style=""><span class="text">S Class</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="7"><a tabindex="0" class="" style=""><span class="text">C Class</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="8"><a tabindex="0" class="" style=""><span class="text">B Class</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="9"><a tabindex="0" class="" style=""><span class="text">A Class</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-                            </div>
-                        </div>-->
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Start Hero Slider -->
-        <div class="hero-slider heroflex flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-speed="7000" data-pause="yes">
-            <ul class="slides">
-                <li class="parallax" style="width: 100%; float: left; margin-right: -100%; position: relative; display: none; background-image: url(&quot;http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER&quot;);"></li>
-                <li class="parallax flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; display: list-item; background-image: url(&quot;http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER&quot;);"></li>
-            </ul>
-            <ul class="flex-direction-nav"><li><a class="flex-prev" href="#"></a></li><li><a class="flex-next" href="#"></a></li></ul></div>
-        <!-- End Hero Slider -->
-    </div>
-    <!--<div class="hero-area">
-            <div class="hero-slider heroflex flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes"
-             data-style="fade" data-speed="7000" data-pause="yes">
-            <ul class="slides">
-                <li class="parallax"
-                    style="background-image:url(http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER);"></li>
-                <li class="parallax"
-                    style="background-image:url(http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER);"></li>
-            </ul>
-        </div>
-    </div>-->
-
-
-    <!--<div class="utility-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-8">
-                    </div>
-              <div class="col-md-4 col-sm-6 col-xs-8">
-                    <div class="toggle-make">
-                        <a href="#"><i class="fa fa-navicon"></i></a>
-                        <span>Browse by body style</span>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-6 col-xs-4">
-                    <ul class="utility-icons social-icons social-icons-colored">
-                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="by-type-options">
-            <div class="container">
-                <div class="row">
-                    <ul class="owl-carousel carousel-alt" data-columns="6" data-autoplay="" data-pagination="no"
-                        data-arrows="yes" data-single-item="no" data-items-desktop="6" data-items-desktop-small="4"
-                        data-items-mobile="3" data-items-tablet="4">
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/wagon.png" alt=""> <span>Wagon</span></a>
-                        </li>
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/minivan.png" alt="">
-                            <span>Minivan</span></a></li>
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/coupe.png" alt=""> <span>Coupe</span></a>
-                        </li>
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/convertible.png" alt="">
-                            <span>Convertible</span></a></li>
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/crossover.png" alt="">
-                            <span>Crossover</span></a></li>
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/suv.png" alt="">
-                            <span>SUV</span></a></li>
-                        <li class="item"><a href="results-list.html#"><img src="img/body-types/minicar.png" alt="">
-                            <span>Minicar</span></a></li>
-                        <li class="item"><a href="results-list.html"><img src="img/body-types/sedan.png" alt=""> <span>Sedan</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>-->
 
     <div class="main" role="main">
         @{body}
@@ -244,7 +86,7 @@
         </div>
     </div>
 </div>
-@{js('jquery-2.0.0.min.js',
+@{js('js/modernizr.js','jquery-2.0.0.min.js',
     'vendor/prettyphoto/js/prettyphoto.js',
     'ui-plugins.js',
     'helper-plugins.js',
@@ -256,15 +98,6 @@
     'vendor/flexslider/js/jquery.flexslider.js',
     'vendor/flexslider/js/jquery.flexslider.js'
     )}
-<!--<script src="js/jquery-2.0.0.min.js"></script>-->
-<!--<script src="vendor/prettyphoto/js/prettyphoto.js"></script>-->
-<!--<script src="js/ui-plugins.js"></script>-->
-<!--<script src="js/helper-plugins.js"></script>-->
-<!--<script src="vendor/owl-carousel/js/owl.carousel.min.js"></script>-->
-<!--<script src="vendor/password-checker.js"></script>-->
-<!--<script src="js/bootstrap.js"></script>-->
-<!--<script src="js/init.js"></script>-->
-<!--<script src="vendor/flexslider/js/jquery.flexslider.js"></script>-->
 
 
 <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
