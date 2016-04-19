@@ -11,7 +11,7 @@ function view_signup() {
      console.log (users);
      });*/
 
-    console.log(self.body);
+    //console.log(self.body);
 
     self.view('signup');
 }
@@ -20,18 +20,24 @@ function json_signup() {
     var self = this;
 
     var Users = MODEL('users').schema;
-    var userFormData = {
-        'email': self.body.email,
-        'password': self.body.password
-    };
 
-    var userData = new Users(userFormData);
+    /* var userFormData = {
+     'email': self.body.email,
+     'password': self.body.password
+     };*/
 
-    if (userData.validateSync()) {
-        console.log("Has errors");
-        self.json(userData.validateSync());
+    var user = new Users(self.body);
+
+    if (user.validateSync()) {
+        self.json(user.validateSync());
     } else {
-        return self.transfer("/");
+        user.signupUser(function (err) {
+            if (err) {
+                return self.json(err);
+            }
+            return self.transfer("/");
+        });
+        //
     }
 
 }

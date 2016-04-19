@@ -1,33 +1,8 @@
-exports.install = function() {
-//    framework.route('/', view_homepage);
-//    framework.route('/', view_profile, ['authorize']);
-//    framework.route('/usage/', view_usage);
+exports.install = function () {
     framework.route('/login/', json_login, ['xhr', 'post']);
     framework.route('/logoff/', json_logoff, ['authorize']);
 };
 
-// Homepage & login form
-// GET, [unlogged]
-function view_homepage() {
-    var self = this;
-    self.view('homepage');
-}
-
-// User profile
-// GET, [logged]
-function view_profile() {
-    var self = this;
-    self.json(self.user);
-
-    // in a view @{user.alias}
-}
-
-// Framework usage
-// GET
-function view_usage() {
-    var self = this;
-    self.plain(framework.usage(true));
-}
 
 // Login process
 // POST, [xhr, unlogged]
@@ -37,13 +12,13 @@ function json_login() {
 
     // read user information from database
     // this is an example
-    var user = { id: '1', alias: 'Peter Sirka' };
+        var user = {id: '1', alias: 'Peter Sirka'};
 
     // create cookie
     // save to session
     auth.login(self, user.id, user);
 
-    self.json({ r: true });
+    self.json({r: true});
 }
 
 // Logoff process
