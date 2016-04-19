@@ -10,10 +10,11 @@
             <div class="header-right">
                 <div class="user-login-panel">
                     @{if user === null}
-                        <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">Войти</a>
-                        <a href="/signup" class="btn btn-primary btn-sm">Зарегестрироваться</a>
+                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">Войти</a>
+                    <a href="/signup" class="btn btn-primary btn-sm">Зарегестрироваться</a>
                     @{else}
-                        <a href="/logoff" class="btn btn-primary btn-sm">Выйти</a>
+                    <a href="/private" class="btn btn-primary btn-sm">Кабинет</a>
+                    <a href="/logoff" class="btn btn-primary btn-sm">Выйти</a>
                     @{fi}
                 </div>
                 <!--            <a href="#" class="visible-sm visible-xs" id="menu-toggle" style="display: none;"><i
