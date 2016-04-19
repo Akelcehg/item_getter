@@ -41,19 +41,6 @@ usersSchema.methods.signupUser = function (cb) {
 usersSchema.pre('save', function (next, done) {
     var user = this;
 
-
-    /*    MODEL('users').schema.findOne({email: user.email}, function (err, results) {
-     if (err) {
-     done(err);
-     } else if (results) { //there was a result found, so the email address exists
-     user.invalidate("email", "email must be unique");
-     //done(new Error("email must be unique"));
-     done();
-     } else {
-     done();
-     }
-     });*/
-
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
 
@@ -66,10 +53,6 @@ usersSchema.pre('save', function (next, done) {
 usersSchema.methods.comparePassword = function (candidatePassword, cb) {
     var user = this;
     return candidatePassword === F.hash('md5', user.password);
-    /*bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-     if (err) return cb(err);
-     cb(null, isMatch);
-     });*/
 };
 
 

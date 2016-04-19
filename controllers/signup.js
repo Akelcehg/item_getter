@@ -5,14 +5,6 @@ exports.install = function () {
 
 function view_signup() {
     var self = this;
-
-    /*Users.find(function(err, users) {
-     console.log (err);
-     console.log (users);
-     });*/
-
-    //console.log(self.body);
-
     self.view('signup');
 }
 
@@ -35,9 +27,9 @@ function json_signup() {
             if (err) {
                 return self.json(err);
             }
+            var auth = MODULE('auth');
+            auth.login(self, user.id, user);
             return self.transfer("/");
         });
-        //
     }
-
 }

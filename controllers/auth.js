@@ -1,5 +1,5 @@
 exports.install = function () {
-    framework.route('/login/', json_login, ['xhr', 'post']);
+    framework.route('/login/', json_login, ['post']);
     framework.route('/logoff/', json_logoff, ['authorize']);
 };
 
@@ -12,13 +12,21 @@ function json_login() {
 
     // read user information from database
     // this is an example
-        var user = {id: '1', alias: 'Peter Sirka'};
+    var Users = MODEL('users').schema;
+    Users.findOne({
+        email: self.body.email,
+        password: F.hash('md5', self.body.password)
+    }, function (err, user) {
+        if (err) {
+            throw err;
+        } else if (user) { //there was a result found, so the email address exists
+            auth.login(self, user.id, user);
+            return self.transfer("/");
+        } else return self.json({r: false});
+    });
 
     // create cookie
     // save to session
-    auth.login(self, user.id, user);
-
-    self.json({r: true});
 }
 
 // Logoff process
