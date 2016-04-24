@@ -1,4 +1,5 @@
+var parserModule = MODULE('parser');
 
-
-F.on("load",function () {   
+F.on("load",function () {
+    parserModule.parse();
 });
