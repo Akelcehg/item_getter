@@ -15,6 +15,13 @@ exports.parse = function () {
 };
 
 function getPageContent(pageContent) {
-    $ = cheerio.load(pageContent);
-    console.log($('h2.title').text());
+    $ = cheerio.load(pageContent, {
+        normalizeWhitespace: true,
+        decodeEntities: true
+    });
+    //console.log($('h1.title').text());
+    $('h1.title').each(function (i, elem) {
+        console.log($(this).text());
+    });
+
 }
