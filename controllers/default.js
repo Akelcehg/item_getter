@@ -6,9 +6,6 @@ exports.install = function () {
 
 function view_index() {
     var self = this;
-
-
-
     /*var Users = MODEL('users').schema;
     var page = (self.query.page || '1').parseInt();
     var perpage = 2;
