@@ -8,7 +8,7 @@ exports.uninstall = function (options) {
 };
 
 exports.parse = function () {
-    console.log("Parsing");
+    console.log("=>Parsing");
     httpModule.getPage('https://habrahabr.ru/interesting/', function (error, pageContent) {
         getPageContent(pageContent);
     });
@@ -19,9 +19,9 @@ function getPageContent(pageContent) {
         normalizeWhitespace: true,
         decodeEntities: true
     });
-    //console.log($('h1.title').text());
+    //console.log($('h1.title').toArray());
     $('h1.title').each(function (i, elem) {
-        console.log($(this).text());
+        console.log($(this).text().trim());
     });
 
 }
