@@ -1,0 +1,27 @@
+{
+  "name": "item_getter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "debug.js",
+  "dependencies": {
+    "iconv-lite": "^0.4.13",
+    "mongoose": "^4.4.13",
+    "request": "^2.72.0",
+    "total.js": "^1.9.7",
+    "uglify-js": "^2.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akelcehg/item_getter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akelcehg/item_getter/issues"
+  },
+  "homepage": "https://github.com/Akelcehg/item_getter#readme"
+}
