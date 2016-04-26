@@ -19,8 +19,7 @@ function getPageContent(pageContent) {
         normalizeWhitespace: true,
         decodeEntities: true
     });
-    //console.log($('h1.title').toArray());
-    $('h1.title').each(function (i, elem) {      
+    $('h1.title').each(function (i, elem) {
         console.log($(this).text().trim());
     });
 
