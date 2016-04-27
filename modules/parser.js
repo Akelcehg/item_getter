@@ -15,7 +15,7 @@ exports.parse = function () {
 };
 
 function getPageContent(pageContent) {
-    $ = cheerio.load(pageContent, {
+    var $ = cheerio.load(pageContent, {
         normalizeWhitespace: true,
         decodeEntities: true
     });
