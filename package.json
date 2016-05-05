@@ -5,6 +5,8 @@
   "main": "debug.js",
   "dependencies": {
     "cheerio": "^0.20.0",
+    "db-migrate": "^0.10.0-beta.11",
+    "db-migrate-mongodb": "^1.1.4",
     "iconv-lite": "^0.4.13",
     "mongoose": "^4.4.13",
     "request": "^2.72.0",

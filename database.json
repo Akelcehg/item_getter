@@ -1,0 +1,8 @@
+{
+  "dev": {
+    "driver": "Mongodb",
+    "host": "localhost",
+    "port": "27017",
+    "database": "item_manager"
+  }
+}
