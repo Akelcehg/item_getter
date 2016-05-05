@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function (db) {
-  db.createTable('items_links');
+  db.createTable('items_list');
   /*db.insert('items_links',
       {a: 1},
       function (err, result) {
@@ -26,7 +26,6 @@ exports.up = function (db) {
 };
 
 exports.down = function (db) {
-  db.dropTable('items_links');
+  db.dropTable('items_list');
   return null;
 };
-

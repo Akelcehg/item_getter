@@ -4,11 +4,14 @@
   "description": "",
   "main": "debug.js",
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "cheerio": "^0.20.0",
     "db-migrate": "^0.10.0-beta.11",
     "db-migrate-mongodb": "^1.1.4",
     "iconv-lite": "^0.4.13",
     "mongoose": "^4.4.13",
+    "node-phantom-simple": "^2.2.4",
+    "phantomjs": "^2.1.7",
     "request": "^2.72.0",
     "total.js": "^1.9.7",
     "uglify-js": "^2.6.2"

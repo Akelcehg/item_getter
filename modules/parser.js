@@ -1,5 +1,6 @@
 var httpModule = MODULE('http');
 var cheerio = require('cheerio');
+var async = require('async');
 
 exports.install = function (options) {
 };
@@ -73,11 +74,31 @@ exports.parse = function () {
 };
 
 function parsePageContent(pageContent) {
+    
     console.log('Parse block');
+
     var $ = cheerio.load(pageContent, {
         normalizeWhitespace: true
         //decodeEntities: true
     });
+
+    var ItemsList = MODEL('items_list').schema;
+    var items = new ItemsList();
+
+    items.getAllItems(function (items) {
+        async.each(items, function (item, callback) {
+            console.log(item);
+            callback();
+        }, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Done');
+            }
+        });
+
+    });
+
     /*    $('div.ticket-item.paid').each(function (i, elem) {
      console.log($(this)
      .children('div.m_head-ticket')
