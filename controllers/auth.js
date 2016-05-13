@@ -24,7 +24,6 @@ function json_login() {
             return self.transfer("/");
         } else return self.json({r: false});
     });
-
     // create cookie
     // save to session
 }
