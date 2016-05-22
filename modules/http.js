@@ -1,6 +1,48 @@
 var request = require('request');
+// Constructor
+function Http(link) {
 
-exports.getPage = function (pageUrl, cb) {
+    this.link = link;
+
+}
+
+Http.prototype.getPageContent = function(cb) {
+
+    var self = this;
+    var driver = require('node-phantom-simple');
+    driver.create({ path: require('phantomjs').path }, function(err, browser) {
+        return browser.createPage(function(err, page) {
+
+            return page.open(self.link, function(err, status) {
+               
+                setTimeout(function() {
+                    page.evaluate(function() {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    });
+                    setTimeout(function() {
+                        //page.set('viewportSize', {width: 1024, height: 768});
+                        //page.render('capture.png');
+
+                        page.get('content', function(err, html) {
+
+                            //savePageToFile(html);
+                            //parsePageContent(html);
+                            cb(err,html);
+                            browser.exit();
+                        });
+                    }, 5000);
+
+                }, 5000);
+
+            });
+
+        });
+    });
+};
+
+module.exports = Http;
+
+/*exports.getPage = function (pageUrl, cb) {
     var options = {
         url: pageUrl,
         encoding: 'UTF8',
@@ -22,4 +64,4 @@ exports.getPage = function (pageUrl, cb) {
     }
 
     request(options, callback);
-};
+};*/

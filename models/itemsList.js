@@ -8,12 +8,12 @@ var itemsListSchema = new Schema({
 });
 itemsListSchema.set('collection', 'items_list');
 
-itemsListSchema.methods.getAllItems = function (cb) {
-    MODEL('items_list').schema.find(function (err, items) {
+itemsListSchema.methods.getAllItems = function(cb) {
+    MODEL('items_list').schema.find(function(err, items) {
         if (err) {
             console.log(err);
-            return cb([]);
-        } else return cb(items);
+            cb(err,[]);
+        } else cb(null,items);
     });
 };
 

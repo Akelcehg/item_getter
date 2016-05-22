@@ -3,7 +3,6 @@ exports.install = function () {
     framework.route('/logoff/', json_logoff, ['authorize']);
 };
 
-
 // Login process
 // POST, [xhr, unlogged]
 function json_login() {
@@ -23,9 +22,7 @@ function json_login() {
             auth.login(self, user.id, user);
             return self.transfer("/");
         } else return self.json({r: false});
-    });
-    // create cookie
-    // save to session
+    })   
 }
 
 // Logoff process

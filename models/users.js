@@ -19,9 +19,9 @@ var usersSchema = new Schema({
     }
 });
 
-usersSchema.path('email').validate(function (value, respond) {
+usersSchema.path('email').validate(function(value, respond) {
 
-    MODEL('users').schema.findOne({email: value}, function (err, user) {
+    MODEL('users').schema.findOne({ email: value }, function(err, user) {
         if (err) {
             respond(false);
         } else if (user) { //there was a result found, so the email address exists
@@ -30,15 +30,14 @@ usersSchema.path('email').validate(function (value, respond) {
     });
 }, 'Пользователь с таким имейлом уже есть');
 
-
-usersSchema.methods.signupUser = function (cb) {
+usersSchema.methods.signupUser = function(cb) {
     var user = this;
-    user.save(function (err) {
+    user.save(function(err) {
         cb(err);
     });
 };
 
-usersSchema.pre('save', function (next, done) {
+usersSchema.pre('save', function(next, done) {
     var user = this;
 
     // only hash the password if it has been modified (or is new)
@@ -50,7 +49,7 @@ usersSchema.pre('save', function (next, done) {
 
 });
 
-usersSchema.methods.comparePassword = function (candidatePassword, cb) {
+usersSchema.methods.comparePassword = function(candidatePassword, cb) {
     var user = this;
     return candidatePassword === F.hash('md5', user.password);
 };
