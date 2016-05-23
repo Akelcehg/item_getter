@@ -1,9 +1,8 @@
 var Http = require('./http.js');
 var File = require('./file.js');
-var cheerio = require('cheerio');
+var ItemConfig = require('./itemConfig.js');
+var FieldHandler = require('./fieldHandler.js');
 var _async = require('async');
-
-
 
 exports.install = function(options) {};
 
@@ -15,20 +14,11 @@ exports.parse = function() {
 
     async(function*() {
 
-        var c = yield sync(custom)(1, 2);
-        
-        console.log(c);
-        
-
-
-
-        //console.log(x);
-
-        var link = 'https://auto.ria.com/search/#countpage=10&power_name=1&s_yers[0]=0&po_yers[0]=0&currency=1&engineVolumeFrom=&engineVolumeTo=';
+        /*var link = 'https://auto.ria.com/search/#countpage=10&power_name=1&s_yers[0]=0&po_yers[0]=0&currency=1&engineVolumeFrom=&engineVolumeTo=';
 
         var page = new Http(link);
+*/
 
-        var file = new File();
         /*
             1)выкачать просто файлы для работы, что бы не ждать пол жизни интернета
             2)поочередно каждый прогнать через парсер из базы выбрав и доставл фалй. а рядом сделать асинхр ХТТП запрос
@@ -37,35 +27,51 @@ exports.parse = function() {
         //file.getFile('/pagename.html', function(err, pageContent) {
 
         var items = new MODEL('items_list').schema();
+        var file = new File();
 
-        var d = yield sync(items.getAllItems)();
-        console.log(d);
+        var activeItems = yield sync(items.getAllItems)();
 
-        items.getAllItems(function(err,items) {
-console.log ("das");
-console.log (items);
-            _async.each(items, function(item, callback) {
+        //items.getAllItems(function(err,items) {
 
-                //Достал все сайты из базы и теперь их надо прогнать через ХТТП
-                //HTTP GET -> parse links -> parse items
-                //пока читать с файла
 
-                //это потом меняем на HTTP
-                file.getFile('/pagename.html', function(err, pageContent) {
+        _async.each(activeItems, function(item, callback) {
 
-                    parsePageContent(pageContent, item);
-                    callback();
-                });
+            //Достал все сайты из базы и теперь их надо прогнать через ХТТП
+            //HTTP GET -> parse links -> parse items
+            //пока читать с файла
 
-            }, function(err) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('Done');
-                }
-            });
+            //это потом меняем на HTTP
 
+            async(function*() {
+
+                var pageFile = yield sync(file.getFile)('./pagename.html');
+
+                var itemConfigFile = new ItemConfig(item['name']);
+                var configFile = yield sync(itemConfigFile.getConfigFile)();
+
+                console.log(getItemLinks(pageFile, configFile));
+                
+                callback();
+                //file.getFile('/pagename.html', function(err, pageContent) {
+
+                //parsePageContent(pageFile, item);
+                //var itemConfigFile = yield sync(file.getItemConfigFile)(item['name']);
+                //console.log(getItemLinks(pageFile));
+
+
+                //});
+
+            })();
+
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Done');
+            }
         });
+
+        //        });
 
         //});
 
@@ -75,11 +81,27 @@ console.log (items);
                 if (err) console.log (err);
             });
         });*/
-    })(function(err) {        
+
+    })(function(err) {
         if (err) console.log(err);
     });
 
 };
+
+function getItemLinks (itemsListPage, configFile) {
+
+    var listObject = configFile['items_list'];
+
+    var fieldHandler = new FieldHandler(
+        //listObject['parent_container'],
+        listObject['link_item'],
+        listObject['link_attribute'],
+        itemsListPage
+    );
+
+    return fieldHandler.getFieldValue();
+
+}
 
 function parsePageContent(pageContent, itemData) {
 
@@ -130,13 +152,13 @@ function parsePageContent(pageContent, itemData) {
 
 }
 
-function loadItemConfigFile(name, cb) {
+/*function loadItemConfigFile(name, cb) {
     var configFile = new File();
 
     configFile.getFile('items_config/' + name + '.json', function(err, content) {
         cb(err, JSON.parse(content));
     });
-}
+}*/
 
 function custom(a, b, callback) {
     // callback(error, result);

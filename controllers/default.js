@@ -1,4 +1,3 @@
-var fs = require('fs');
 exports.install = function() {
     F.route('/', view_index);
     // or

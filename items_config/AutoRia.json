@@ -1,7 +1,6 @@
 {
-    "items_list": {
-        "parent_container": "div.ticket-item.paid",
-        "link_item": "div.m_head-ticket div.box-head div.item.head-ticket div.ticket-title a.address",
+    "items_list": {       
+        "link_item": "div.ticket-item.paid div.m_head-ticket div.box-head div.item.head-ticket div.ticket-title a.address",
         "link_attribute": "title"
     },
     "item_fields": [

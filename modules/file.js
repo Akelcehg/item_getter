@@ -11,11 +11,11 @@ File.prototype.saveFile = function(path, name, content, cb) {
 
 }
 
-File.prototype.getFile = function(path,cb) {
-
+File.prototype.getFile = function(path, cb) {
     fs.readFile(path, 'utf8', function(err, data) {
-        cb(err,data);
+        cb(err, data);
     });
 }
+
 
 module.exports = File;
