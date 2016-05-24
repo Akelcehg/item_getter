@@ -1,3 +1,4 @@
+var Item = MODEL('item').schema;
 var Http = require('./http.js');
 var File = require('./file.js');
 var ItemConfig = require('./itemConfig.js');
@@ -34,7 +35,8 @@ exports.parse = function() {
         //items.getAllItems(function(err,items) {
 
 
-        _async.each(activeItems, function(item, callback) {
+        //_async.each(activeItems, function(item, callback) {
+        activeItems.forEach(function(item, i, arr) {
 
             //Достал все сайты из базы и теперь их надо прогнать через ХТТП
             //HTTP GET -> parse links -> parse items
@@ -49,9 +51,9 @@ exports.parse = function() {
                 var itemConfigFile = new ItemConfig(item['name']);
                 var configFile = yield sync(itemConfigFile.getConfigFile)();
 
-                console.log(getItemLinks(pageFile, configFile));
-                
-                callback();
+                parseItems(getItemLinks(pageFile, configFile))
+
+                //callback();
                 //file.getFile('/pagename.html', function(err, pageContent) {
 
                 //parsePageContent(pageFile, item);
@@ -62,14 +64,15 @@ exports.parse = function() {
                 //});
 
             })();
-
-        }, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Done');
-            }
         });
+
+        /* }, function(err) {
+             if (err) {
+                 console.log(err);
+             } else {
+                 console.log('Done');
+             }
+         });*/
 
         //        });
 
@@ -88,7 +91,7 @@ exports.parse = function() {
 
 };
 
-function getItemLinks (itemsListPage, configFile) {
+function getItemLinks(itemsListPage, configFile) {
 
     var listObject = configFile['items_list'];
 
@@ -103,64 +106,60 @@ function getItemLinks (itemsListPage, configFile) {
 
 }
 
-function parsePageContent(pageContent, itemData) {
 
-    console.log('Parse block');
+function parseItems(itemLinks) {
 
-    /*    var $ = cheerio.load(pageContent, {
-            normalizeWhitespace: true
-                //decodeEntities: true
-        });
-    */
-    /*var ItemsList = MODEL('items_list').schema;
-    var items = new ItemsList();
+    //var item = new Item();  
+    // var itemPage = new Http(itemLinks[0]);
+    // itemPage.getPageContent(function(err, itemPageContent) {
 
-    items.getAllItems(function(items) {
-        async.each(items, function(item, callback) {
-            console.log(item);
-            callback();
-        }, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Done');
-            }
-        });
-
+/*    var f = new File();
+    f.saveFile('/', 'itempage.html', itemPageContent, function() {
+        console.log('each done series');
     });*/
 
-    /*        $('div.ticket-item.paid').each(function (i, elem) {
-         console.log($(this)
-         .children('div.m_head-ticket')
-         .children('div.box-head')
-         .children('div.item.head-ticket')
-         .children('div.ticket-title')
-         .children('a.address')
-         .attr('title'));
-         console.log("--------------------------------");
-         });*/
+    // });
 
-    loadItemConfigFile(itemData['name'], function(err, content) {
-        /*
-            1)считал файл конфигов
-            2)получил ссылки
-            3)отправил на парсинг ссылок в параллельно режиме
-            4)сохранение JSON обхектов            
-        */
-        console.log(content);
+    var f = new File();
+    f.getFile('./itempage.html',function(err,page){
+
+        
+        
     });
 
+    /*_async.eachSeries(itemLinks, function(itemLink, callback) {
+
+        var itemPage = new Http(itemLink);
+        itemPage.getPageContent(function(err,itemPageContent) {
+
+            console.log('each done series');
+
+            callback(err);
+
+        });
+    }, function(err) {
+        if (err) {
+            console.log('Error processing link ' + err);
+        } else {
+            console.log('All links processed');
+        }
+    });*/
+
+    /*itemLinks.forEach(function(itemLink, i, arr) {
+        async(function*() {
+            var itemPage = new Http(itemLink);
+            yield sync(itemPage.getPageContent)();
+        })();
+    })(function(err) {
+        if (err) console.log(err);
+    });*/
+
+
+
+    //get item page
+    //load item config file
+    //process item page => modify item values
+    //save item to db    
+
+    //var user = new Users(self.body);
 }
-
-/*function loadItemConfigFile(name, cb) {
-    var configFile = new File();
-
-    configFile.getFile('items_config/' + name + '.json', function(err, content) {
-        cb(err, JSON.parse(content));
-    });
-}*/
-
-function custom(a, b, callback) {
-    // callback(error, result);
-    callback(null, a + b);
-};

@@ -1,40 +1,44 @@
+var driver = require('node-phantom-simple');
 var request = require('request');
 // Constructor
 function Http(link) {
-
+    //async(function*() {
     this.link = link;
-
+    //})();
 }
 
 Http.prototype.getPageContent = function(cb) {
-
     var self = this;
-    var driver = require('node-phantom-simple');
+
     driver.create({ path: require('phantomjs').path }, function(err, browser) {
         return browser.createPage(function(err, page) {
 
             return page.open(self.link, function(err, status) {
-               
+
+                console.log(status);
+
                 setTimeout(function() {
                     page.evaluate(function() {
                         window.scrollTo(0, document.body.scrollHeight);
                     });
                     setTimeout(function() {
-                        //page.set('viewportSize', {width: 1024, height: 768});
-                        //page.render('capture.png');
+                        page.set('viewportSize', { width: 1024, height: 768 });
+                        page.render('capture.png');
 
                         page.get('content', function(err, html) {
 
                             //savePageToFile(html);
                             //parsePageContent(html);
-                            cb(err,html);
+                            console.log('Page recieved' + self.link);
                             browser.exit();
+                            cb(err, html);
                         });
                     }, 5000);
 
                 }, 5000);
 
             });
+
 
         });
     });

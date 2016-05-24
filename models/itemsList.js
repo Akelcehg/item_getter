@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
 
 var itemsListSchema = new Schema({
     link: String,
-    name: String
+    name: String,
+    config_file: String,
 
 });
 itemsListSchema.set('collection', 'items_list');
