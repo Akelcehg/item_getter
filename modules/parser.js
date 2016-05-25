@@ -91,7 +91,7 @@ exports.parse = function() {
 
 };
 
-function getItemLinks(itemsListPage, configFile) {
+exports.getItemLinks = function(itemsListPage, configFile) {
 
     var listObject = configFile['items_list'];
 
@@ -107,7 +107,7 @@ function getItemLinks(itemsListPage, configFile) {
 }
 
 
-function parseItems(itemLinks) {
+exports.parseItems = function(itemLinks) {
 
     //var item = new Item();  
     // var itemPage = new Http(itemLinks[0]);
@@ -162,4 +162,11 @@ function parseItems(itemLinks) {
     //save item to db    
 
     //var user = new Users(self.body);
+}
+
+exports.getPageContent = function(itemLink,cb) {
+    var page = new Http(itemLink);
+    page.getPageContent(function (err,html) {
+        cb(err,html);
+    });    
 }

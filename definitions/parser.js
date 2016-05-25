@@ -1,5 +1,6 @@
 var parserModule = MODULE('parser');
 
 F.on("load",function () {    
-    parserModule.parse();
+    //parserModule.parse();
+    console.log ("loaded");
 });

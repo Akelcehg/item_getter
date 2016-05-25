@@ -1,8 +1,14 @@
 exports.install = function() {
     F.route('/', view_index);
+    F.route('#404', view_404);
     // or
     // F.route('/');
 };
+
+function view_404() {
+    this.plain('404 page not found');
+}
+
 
 function* view_index() {
     var self = this;
