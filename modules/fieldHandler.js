@@ -10,10 +10,6 @@ function FieldHandler(node, nodeAttribute, page) {
     })();
 }
 
-FieldHandler.prototype.getFieldValues = function() {
-
-}
-
 FieldHandler.prototype.getFieldValue = function() {
     //вернуть все значения поля. ?массив
     return getNodesData();
@@ -38,7 +34,12 @@ function getNodesData() {
         childrenNodes.forEach(function(item, i, arr) {
             parent = parent.children(item)
         });
-        nodeData.push(parent.attr(self.nodeAttribute));
+
+        if (self.nodeAttribute.indexOf('()') >= 0) {            
+            nodeData.push(parent[self.nodeAttribute.replace('()','')]());
+        } else {
+            nodeData.push(parent.attr(self.nodeAttribute));
+        }
     });
     return nodeData;
 }

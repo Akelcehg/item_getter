@@ -1,9 +1,15 @@
 {
-    "items_list": {       
+    "items_list": {
         "link_item": "div.ticket-item.paid div.m_head-ticket div.box-head div.item.head-ticket div.ticket-title a.address",
         "link_attribute": "href"
     },
-    "item_fields": [
-        {}, {}, {}
-    ]
+    "item_fields": [{
+        "name": "Цена",
+        "field_node": "div.price-seller span.price",
+        "field_attribute": "text()"
+    }, {
+        "name": "Пробег",
+        "field_node": "div.base-information.delimeter div.run strong",
+        "field_attribute": "text()"
+    }]
 }

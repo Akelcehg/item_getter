@@ -10,84 +10,48 @@ exports.install = function(options) {};
 exports.uninstall = function(options) {};
 
 exports.parse = function() {
-
+var self = this;
     console.log("=>Parsing");
-
     async(function*() {
 
-        /*var link = 'https://auto.ria.com/search/#countpage=10&power_name=1&s_yers[0]=0&po_yers[0]=0&currency=1&engineVolumeFrom=&engineVolumeTo=';
+        var itemConfigFile = new ItemConfig('Autobazarlegkovie');
+        var configFile = yield sync(itemConfigFile.getConfigFile)();
 
-        var page = new Http(link);
-*/
+            var file = new File();
+            file.getFile('./bazar.html',function(err,pageFile){
+                
+                console.log(self.getItemLinks(pageFile, configFile));
+            });
 
-        /*
-            1)выкачать просто файлы для работы, что бы не ждать пол жизни интернета
-            2)поочередно каждый прогнать через парсер из базы выбрав и доставл фалй. а рядом сделать асинхр ХТТП запрос
-        */
+        /*                parserModule.getPageContent(item['link'], function(err, page) {
 
-        //file.getFile('/pagename.html', function(err, pageContent) {
+                            if (err) {
 
+                                self.json({ 'status': 'fail' });
+                            } else self.json({ 'status': 'ok', 'links': parserModule.getItemLinks(page, configFile) });
+                        });*/
+
+
+    })();
+
+    /*async(function*() {
         var items = new MODEL('items_list').schema();
         var file = new File();
 
         var activeItems = yield sync(items.getAllItems)();
-
-        //items.getAllItems(function(err,items) {
-
-
-        //_async.each(activeItems, function(item, callback) {
-        activeItems.forEach(function(item, i, arr) {
-
-            //Достал все сайты из базы и теперь их надо прогнать через ХТТП
-            //HTTP GET -> parse links -> parse items
-            //пока читать с файла
-
-            //это потом меняем на HTTP
-
+        async(function*() {
+            var pageFile = yield sync(file.getFile)('./bazar.html');
             async(function*() {
-
-                var pageFile = yield sync(file.getFile)('./pagename.html');
-
-                var itemConfigFile = new ItemConfig(item['name']);
+                var itemConfigFile = new ItemConfig(item[0]['config_file']);
                 var configFile = yield sync(itemConfigFile.getConfigFile)();
-
-                parseItems(getItemLinks(pageFile, configFile))
-
-                //callback();
-                //file.getFile('/pagename.html', function(err, pageContent) {
-
-                //parsePageContent(pageFile, item);
-                //var itemConfigFile = yield sync(file.getItemConfigFile)(item['name']);
-                //console.log(getItemLinks(pageFile));
-
-
-                //});
-
             })();
-        });
+        })();
+        consoloe.log(getItemLinks(pageFile, configFile));
 
-        /* }, function(err) {
-             if (err) {
-                 console.log(err);
-             } else {
-                 console.log('Done');
-             }
-         });*/
 
-        //        });
 
-        //});
+    })();*/
 
-        /*page.getPageContent(function(err,html){
-            if (err) console.log (err);console.log ("page finished");
-            file.saveFile('/','pagename.html',html,function (err) {
-                if (err) console.log (err);
-            });
-        });*/
-
-    })(function(err) {
-        if (err) console.log(err);
-    });
 
 };
 
@@ -113,18 +77,18 @@ exports.parseItems = function(itemLinks) {
     // var itemPage = new Http(itemLinks[0]);
     // itemPage.getPageContent(function(err, itemPageContent) {
 
-/*    var f = new File();
-    f.saveFile('/', 'itempage.html', itemPageContent, function() {
-        console.log('each done series');
-    });*/
+    /*    var f = new File();
+        f.saveFile('/', 'itempage.html', itemPageContent, function() {
+            console.log('each done series');
+        });*/
 
     // });
 
     var f = new File();
-    f.getFile('./itempage.html',function(err,page){
+    f.getFile('./itempage.html', function(err, page) {
 
-        
-        
+
+
     });
 
     /*_async.eachSeries(itemLinks, function(itemLink, callback) {
@@ -164,9 +128,13 @@ exports.parseItems = function(itemLinks) {
     //var user = new Users(self.body);
 }
 
-exports.getPageContent = function(itemLink,cb) {
+exports.getPageContent = function(itemLink, cb) {
     var page = new Http(itemLink);
-    page.getPageContent(function (err,html) {
-        cb(err,html);
-    });    
+    page.getPageContent(function(err, html) {
+        cb(err, html);
+    });
+}
+
+exports.parseSingleItem = function(itemLink, configFile) {
+    return true;
 }
