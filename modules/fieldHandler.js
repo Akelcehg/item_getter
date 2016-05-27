@@ -51,7 +51,9 @@ function getNodesData() {
         });
 
         if (self.bind_node) {
-            processBindValue($(this),nodeData);
+            if (compareBindValue($(this))) {
+                nodeData.push(getValueByAttributeType(self.nodeAttribute, parent));
+            }
             //console.log(getValueByAttributeType(self.bind_node_attribute,bindNodeParent));
             /*var bindNodesArray = self.bind_node.split(' ');
             bindNodesArray.shift();
@@ -79,11 +81,14 @@ function getValueByAttributeType(attribute, parent) {
     }
 }
 
-function processBindValue(valueNodeParent,valueNodeData) {
+function compareBindValue(valueNodeParent) {
     var self = this;
     var bindNodesArray = self.bind_node.split(' ');
-    bindNodesArray.shift();
+
     var bindNodeParent = valueNodeParent;
+
+    bindNodesArray.shift();
+
     bindNodesArray.forEach(function(bindItem, i, arr) {
         bindNodeParent = bindNodeParent.children(bindItem);
     });
@@ -91,7 +96,7 @@ function processBindValue(valueNodeParent,valueNodeData) {
     var returnedBindNodeValue = getValueByAttributeType(self.bind_node_attribute, bindNodeParent);
 
     if (returnedBindNodeValue === self.expected_value) {
-        valueNodeData.push(getValueByAttributeType(self.nodeAttribute, valueNodeParent));
+        return true;
     }
 }
 
