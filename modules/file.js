@@ -17,5 +17,8 @@ File.prototype.getFile = function(path, cb) {
     });
 }
 
+File.prototype.deleteFile = function(path, cb) {
+    fs.unlink(path, cb())
+}
 
 module.exports = File;

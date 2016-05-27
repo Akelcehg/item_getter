@@ -73,13 +73,10 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-
-
     $('body').on('click', 'a.single_item_parse_button', function(e) {
         var self = $(this);
         var itemId = self.prev('a').attr('class');
         var itemLink = self.prev('a').attr('href');
-
 
         $.post({
             url: "/admin/items/test_item_parse",
@@ -88,7 +85,7 @@ $(document).ready(function() {
                 'itemLink': itemLink
             }
         }).done(function(response) {
-
+            $('.panel-collapse.in').collapse('toggle');
             self.removeClass('disabled');
             self.children('.default-icon').show();
             self.children('.loading-icon').hide();
@@ -97,12 +94,12 @@ $(document).ready(function() {
 
                 //JSON.stringify(obj, undefined, 4);                
                 $('.parsed_item_div').append('<div class="alert alert-success">' +
-                    '<button type="button" class="close" data-dismiss="alert">×</button>Результат парсинга страницы' +
+                    '<button type="button" class="close" data-dismiss="alert">×</button> Результат парсинга страницы' +
                     '<a href="' + itemLink + '" class="parsed_item_href" target="_black">Ссылка на Item</a>' +
                     '<pre class="+parsed_item_obj">' + JSON.stringify(response['item_json'], undefined, 4) + '</pre></div>');
             } else {
                 $('.parsed_item_div').append('<div class="alert alert-danger">' +
-                    '<button type="button" class="close" data-dismiss="alert">×</button>Результат парсинга страницы' +
+                    '<button type="button" class="close" data-dismiss="alert">×</button> Результат парсинга страницы' +
                     '<a href="' + itemLink + '" class="parsed_item_href" target="_black"> Ссылка на Item</a>' +
                     '<pre class="+parsed_item_obj">Ну удалось получить объект</pre></div>');
             }

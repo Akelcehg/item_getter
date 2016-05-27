@@ -19,26 +19,40 @@ Http.prototype.getPageContent = function(cb) {
 
                 return page.open(self.link, function(err, status) {
 
-                    setTimeout(function() {
+                    if (status === 'fail') {
+                        cb(status, null);
+                        browser.exit();
+                    } else {
 
-                        page.evaluate(function() {
-                            window.scrollTo(0, document.body.scrollHeight);
-                        });
                         setTimeout(function() {
-                            page.set('viewportSize', { width: 1024, height: 768 });
-                            page.render('capture.png');
 
-                            page.get('content', function(err, html) {
-                                var f = new File();
-
-                                cb(err, html);
-                                browser.exit();
+                            page.evaluate(function() {
+                                window.scrollTo(0, document.body.scrollHeight);
 
                             });
-                        }, 5000);
 
-                    }, 5000);
+                            setTimeout(function() {
+                                page.evaluate(function() {
+                                    window.scrollTo(0, document.body.scrollHeight);
+                                });
 
+                                page.set('viewportSize', { width: 1024, height: 768 });
+                                page.render('capture.png');
+
+                                page.get('content', function(err, html) {
+                                    page.evaluate(function() {
+                                        window.scrollTo(0, document.body.scrollHeight);
+                                    });
+                                    setTimeout(function() {
+
+                                        cb(err, html);
+                                        browser.exit();
+                                    }, 10000);
+                                });
+
+                            }, 10000);
+                        }, 10000);
+                    }
                 });
             });
 
