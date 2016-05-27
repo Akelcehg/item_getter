@@ -18,7 +18,10 @@ File.prototype.getFile = function(path, cb) {
 }
 
 File.prototype.deleteFile = function(path, cb) {
-    fs.unlink(path, cb())
+    fs.readFile(path, 'utf8', function(err, file) {
+        if (file) fs.unlink(path, cb())
+        else cb();
+    });
 }
 
 module.exports = File;
