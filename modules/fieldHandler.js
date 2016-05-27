@@ -1,12 +1,15 @@
 var cheerio = require('cheerio');
 
-function FieldHandler(node, nodeAttribute, page) {
+function FieldHandler(node, nodeAttribute, page, bind_node, bind_node_attribute, expected_value) {
     async(function*() {
 
         this.node = node;
         this.nodeAttribute = nodeAttribute;
         this.page = page;
 
+        this.bind_node = bind_node;
+        this.bind_node_attribute = bind_node_attribute;
+        this.expected_value = expected_value;
     })();
 }
 
@@ -24,24 +27,72 @@ function getNodesData() {
 
     var nodeData = [];
     var nodesArray = this.node.split(' ');
+
     var parentNode = nodesArray[0];
 
     nodesArray.shift();
     var childrenNodes = nodesArray;
 
     $(parentNode).each(function(i, elem) {
+
         var parent = $(this);
+
+        /*if (self.bind_node) {
+            var bindNodesArray = this.bind_node.split(' ');
+            bindNodesArray.shift();
+            var bindNodeParent = $(this);
+            bindNodesArray.forEach(function(bindItem, i, arr) {
+                bindNodeParent = bindNodeParent.children(bindItem);
+            });
+        }*/
+
         childrenNodes.forEach(function(item, i, arr) {
             parent = parent.children(item)
         });
 
-        if (self.nodeAttribute.indexOf('()') >= 0) {            
-            nodeData.push(parent[self.nodeAttribute.replace('()','')]());
-        } else {
-            nodeData.push(parent.attr(self.nodeAttribute));
-        }
+        if (self.bind_node) {
+            processBindValue($(this),nodeData);
+            //console.log(getValueByAttributeType(self.bind_node_attribute,bindNodeParent));
+            /*var bindNodesArray = self.bind_node.split(' ');
+            bindNodesArray.shift();
+            var bindNodeParent = $(this);
+            bindNodesArray.forEach(function(bindItem, i, arr) {
+                bindNodeParent = bindNodeParent.children(bindItem);
+            });
+
+            var returnedBindNodeValue = getValueByAttributeType(self.bind_node_attribute, bindNodeParent);
+
+            if (returnedBindNodeValue === self.expected_value) {
+                nodeData.push(getValueByAttributeType(self.nodeAttribute, parent));
+            }*/
+        } else nodeData.push(getValueByAttributeType(self.nodeAttribute, parent));
+
     });
     return nodeData;
+}
+
+function getValueByAttributeType(attribute, parent) {
+    if (attribute.indexOf('()') >= 0) {
+        return parent[attribute.replace('()', '')]();
+    } else {
+        return parent.attr(attribute);
+    }
+}
+
+function processBindValue(valueNodeParent,valueNodeData) {
+    var self = this;
+    var bindNodesArray = self.bind_node.split(' ');
+    bindNodesArray.shift();
+    var bindNodeParent = valueNodeParent;
+    bindNodesArray.forEach(function(bindItem, i, arr) {
+        bindNodeParent = bindNodeParent.children(bindItem);
+    });
+
+    var returnedBindNodeValue = getValueByAttributeType(self.bind_node_attribute, bindNodeParent);
+
+    if (returnedBindNodeValue === self.expected_value) {
+        valueNodeData.push(getValueByAttributeType(self.nodeAttribute, valueNodeParent));
+    }
 }
 
 module.exports = FieldHandler;

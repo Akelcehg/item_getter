@@ -15,7 +15,10 @@ ItemHandler.prototype.getItemAttributes = function() {
         var fieldHandler = new FieldHandler(
             field_config['field_node'],
             field_config['field_attribute'],
-            self.item_page
+            self.item_page,
+            field_config['bind_node'],
+            field_config['bind_node_attribute'],
+            field_config['expected_value']
         );        
         var itemFieldObject = {
             'name': field_config['name'],
