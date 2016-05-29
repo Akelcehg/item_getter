@@ -1,0 +1,9 @@
+[{
+    "group_name": "Тип кузова",
+    "is_possible": "true",
+    "group_values": ["Седан"]
+},{
+    "group_name": "Привод",
+    "is_possible": "true",
+    "group_values": ["Передний","Задний"]
+}]
