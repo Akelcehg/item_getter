@@ -19,13 +19,12 @@
     'vendor/prettyphoto/css/prettyPhoto.css',
     'vendor/owl-carousel/css/owl.carousel.css',
     'vendor/owl-carousel/css/owl.theme.css',
-    '/colors/color6.css',
-    'custom.css'
+    '/colors/color5.css'
     )}
 
     <!--[if lte IE 9]>
     <link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
-    <!-- <link href="css/custom.css" rel="stylesheet" type="text/css"> -->
+    <link href="css/custom.css" rel="stylesheet" type="text/css"><!-- CUSTOM STYLESHEET FOR STYLING -->
     <!-- Color Style -->
     <!--<link href="colors/color5.css" rel="stylesheet" type="text/css">-->
     <!-- SCRIPTS
@@ -34,7 +33,7 @@
 </head>
 
 
-<body class="home header-v3">
+<body class="">
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser
     today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better
@@ -44,12 +43,9 @@
 
     @{view('partials/header')}
 
-    
-    @{view('/partials/slider')}
-
-
-    @{body}
-
+    <div class="main" role="main">
+        @{body}
+    </div>
 
     @{view('partials/footer')}
 

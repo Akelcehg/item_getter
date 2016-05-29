@@ -7,7 +7,19 @@
         "name": "Цена",
         "field_node": "div.price-seller span.price",
         "field_attribute": "text()"
-    }, {
+    },{
+        "name": "Год",
+        "field_node": "h1.head span.msize span.year",
+        "field_attribute": "text()"
+    },{
+        "name": "Марка",
+        "field_node": "h1.head span[itemprop=brand]",
+        "field_attribute": "text()"
+    },{
+        "name": "Модель",
+        "field_node": "span[itemprop=name]",
+        "field_attribute": "text()"        
+    },{
         "name": "Пробег",
         "field_node": "div.base-information.delimeter div.run strong",
         "field_attribute": "text()"

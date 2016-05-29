@@ -52,7 +52,9 @@ function getNodesData() {
 
         if (self.bind_node) {
             if (compareBindValue($(this))) {
-                nodeData.push(getValueByAttributeType(self.nodeAttribute, parent));
+                var data = getValueByAttributeType(self.nodeAttribute, parent);
+                if (data) data = data.trim();
+                nodeData.push(data);
             }
             //console.log(getValueByAttributeType(self.bind_node_attribute,bindNodeParent));
             /*var bindNodesArray = self.bind_node.split(' ');
@@ -67,7 +69,11 @@ function getNodesData() {
             if (returnedBindNodeValue === self.expected_value) {
                 nodeData.push(getValueByAttributeType(self.nodeAttribute, parent));
             }*/
-        } else nodeData.push(getValueByAttributeType(self.nodeAttribute, parent));
+        } else {
+            var data = getValueByAttributeType(self.nodeAttribute, parent);
+            if (data) data = data.trim();
+            nodeData.push(data);
+        }
 
     });
     return nodeData;
@@ -94,6 +100,8 @@ function compareBindValue(valueNodeParent) {
     });
 
     var returnedBindNodeValue = getValueByAttributeType(self.bind_node_attribute, bindNodeParent);
+
+    if (returnedBindNodeValue) returnedBindNodeValue = returnedBindNodeValue.trim();
 
     if (returnedBindNodeValue === self.expected_value) {
         return true;

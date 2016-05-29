@@ -45,6 +45,9 @@ function test_item_http() {
     MODEL('items_list').schema.findOne({ _id: self.body['itemId'] }, function(err, item) {
         if (!err && item) {
             parserModule.getPageContent(item['link'], function(err, page) {
+
+                var fff = new File();
+                fff.saveFile('/','test.html',page,function(){console.log ('saved');});
                 self.json({ 'status': 'ok' });
             });
         } else self.json({ 'status': 'fail' });
