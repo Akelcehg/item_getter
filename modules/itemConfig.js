@@ -2,14 +2,9 @@ var File = require('./file.js');
 var basePath = __dirname + '/../';
 
 function ItemConfig(itemName) {
-    async(function*() {
+    //async(function*() {
         this.itemName = itemName;
-    })();
-}
-
-ItemConfig.prototype.test = function(cb) {
-    console.log(this.testname);
-    cb();
+    //})();
 }
 
 ItemConfig.prototype.getConfigFile = function(cb) {

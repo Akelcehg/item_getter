@@ -1,7 +1,8 @@
-var File = require('../../modules/file.js');
-var parserModule = MODULE('parser');
-var ItemConfig = require('../../modules/itemConfig.js');
-var ItemHandler = require('../../modules/itemHandler.js');
+var File = require('../../modules/file.js'),
+    parserModule = MODULE('parser'),
+    ItemConfig = require('../../modules/itemConfig.js'),
+    ItemHandler = require('../../modules/itemHandler.js'),
+    _async = require('async');
 
 exports.install = function() {
     F.route('/admin/items', view_items);
@@ -47,7 +48,8 @@ function test_item_http() {
             parserModule.getPageContent(item['link'], function(err, page) {
 
                 var fff = new File();
-                fff.saveFile('/','test.html',page,function(){console.log ('saved');});
+
+                fff.saveFile('./', 'test.html', page, function() { console.log('saved'); });
                 self.json({ 'status': 'ok' });
             });
         } else self.json({ 'status': 'fail' });
@@ -122,16 +124,71 @@ function test_item_parse_page() {
     var self = this;
 
     self.layout('admin/layouts/layout');
-    MODEL('items_list').schema.find(function(err, itemsList) {
+    console.log('startinng');
+    var file = new File();
+    _async.waterfall([
+        function(callback) {
+            MODEL('items_list').schema.find(function(err, itemsList) {
+                callback(err, itemsList);
+            });
+        },
+        function(itemsList, callback) {
+            if (self.get['link'] && self.get['config_file']) {
+                var itemConfigFile = new ItemConfig(self.get['config_file']);
+                itemConfigFile.getConfigFile(function(err, configFile) {
+                    callback(err, configFile, itemsList)
+                });
+            } else callback('Missing get params');
+
+        },
+        function(configFile, itemsList, callback) {
+            file.getFile('./item_page_saved/' + self.get['config_file'] + '.html', function(err, pageFile) {
+                callback(null, pageFile, configFile, itemsList);
+            });
+        },
+        function(pageFile, configFile, itemsList, callback) {
+            if (pageFile) {
+                var itemObject = new ItemHandler(configFile['item_fields'], pageFile);
+                itemObject.getItemAttributes();
+
+                callback(null, { 'items': itemsList, 'jsonObject': itemObject.returnItemAttributes() });
+            } else {
+                parserModule.getPageContent(self.get['link'], function(err, page) {
+
+                    file.saveFile('./item_page_saved/', self.get['config_file'] + '.html', page, function() {
+
+                        if (err || !page) {
+                            callback(err, { 'status': 'fail' });
+                        } else {
+                            var itemObject = new ItemHandler(configFile['item_fields'], page);
+                            itemObject.getItemAttributes();
+                            callback(err, { 'items': itemsList, 'jsonObject': itemObject.returnItemAttributes() });
+                        }
+                    });
+
+                });
+            }
+        }
+    ], function(err, result) {
+        if (err) {
+            console.log('Item parse page error ' + err);
+            self.json(result);
+        } else {
+            self.view('/admin/item_parse', result);
+        }
+    });
+
+
+    /*MODEL('items_list').schema.find(function(err, itemsList) {
 
         if (self.get['link'] && self.get['config_file']) {
 
-            async(function*() {
-                var itemConfigFile = new ItemConfig(self.get['config_file']);
-                var configFile = yield sync(itemConfigFile.getConfigFile)();
+            
+            var itemConfigFile = new ItemConfig(self.get['config_file']);
+            
+            itemConfigFile.getConfigFile(function(err, configFile) {
                 var file = new File();
-
-                if (self.get['delete_file']) yield sync(file.deleteFile)('./item_page_saved/' + self.get['config_file'] + '.html');
+            
 
                 file.getFile('./item_page_saved/' + self.get['config_file'] + '.html', function(err, pageFile) {
                     if (pageFile) {
@@ -157,15 +214,8 @@ function test_item_parse_page() {
                         });
                     }
                 });
-            })(function(err) {
-                if (err) {
-                    console.log(err);
-                    self.json({ 'status': 'fail' });
-                }
             });
 
-
-
         } else self.view('/admin/item_parse', { 'items': itemsList, 'jsonObject': {} });
-    });
+    });*/
 }
