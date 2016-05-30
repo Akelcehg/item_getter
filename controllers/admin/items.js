@@ -59,63 +59,79 @@ function test_item_http() {
 
 function test_item_links() {
     var self = this;
-
-    MODEL('items_list').schema.findOne({ _id: self.body['itemId'] }, function(err, item) {
-
-        async(function*() {
-            if (!err && item) {
+    _async.waterfall([
+        function(callback) {
+            MODEL('items_list').schema.findOne({ _id: self.body['itemId'] }, function(err, item) {
+                callback(err, item);
+            });
+        },
+        function(item, callback) {
+            if (item) {
                 var itemConfigFile = new ItemConfig(item['config_file']);
-                var configFile = yield sync(itemConfigFile.getConfigFile)();
-
-                parserModule.getPageContent(item['link'], function(err, page) {
-
-                    if (err) {
-                        self.json({ 'status': 'fail' });
-                    } else self.json({ 'status': 'ok', 'links': parserModule.getItemLinks(page, configFile) });
+                itemConfigFile.getConfigFile(function(err, configFile) {
+                    callback(err, configFile, item)
                 });
-
-
             } else {
-                self.json({ 'status': 'fail' });
+                callback(err + ' ' + item);
             }
-        })(function(err) {
-            if (err) {
-                console.log(err);
-                self.json({ 'status': 'fail' });
-            }
-        });
+        },
+        function(configFile, item, callback) {
+
+            parserModule.getPageContent(item['link'], function(err, page) {
+                callback(err, { 'status': 'ok', 'links': parserModule.getItemLinks(page, configFile) });
+            });
+        }
+
+    ], function(err, result) {
+        if (err) {
+            console.log('Item parse page error ' + err);
+            self.json({ 'status': 'fail' });
+        } else {
+            self.json(result);
+        }
     });
 
 }
 
 function test_item_parse() {
     var self = this;
-
-    MODEL('items_list').schema.findOne({ _id: self.body['itemId'] }, function(err, item) {
-        async(function*() {
-            var itemConfigFile = new ItemConfig(item['config_file']);
-            var configFile = yield sync(itemConfigFile.getConfigFile)();
+    _async.waterfall([
+        function(callback) {
+            MODEL('items_list').schema.findOne({ _id: self.body['itemId'] }, function(err, item) {
+                callback(err, item);
+            })
+        },
+        function(item, callback) {
+            if (item) {
+                var itemConfigFile = new ItemConfig(item['config_file']);
+                itemConfigFile.getConfigFile(function(err, configFile) {
+                    callback(err, configFile, item)
+                });
+            } else {
+                callback(err + ' ' + item);
+            }
+        },
+        function(configFile, item, callback) {
 
             parserModule.getPageContent(self.body['itemLink'], function(err, page) {
-
-                if (err || !page) {
-                    self.json({ 'status': 'fail' });
-                } else {
-                    var itemObject = new ItemHandler(configFile['item_fields'], page);
-                    itemObject.getItemAttributes();
-                    self.json({
-                        'status': 'ok',
-                        'item_json': itemObject.returnItemAttributes()
-                    });
-                }
+                callback(err, configFile, item, page);
             });
-
-        })(function(err) {
-            if (err) {
-                console.log(err);
-                self.json({ 'status': 'fail' });
-            }
-        });
+        },
+        function(configFile, item, page, callback) {
+            var itemObject = new ItemHandler(configFile['item_fields'], page);
+            itemObject.getItemAttributes();
+            callback(null, {
+                'status': 'ok',
+                'item_json': itemObject.returnItemAttributes()
+            });
+        }
+    ], function(err, result) {
+        if (err) {
+            console.log('Item parse page error ' + err);
+            self.json({ 'status': 'fail' });
+        } else {
+            self.json(result);
+        }
     });
 }
 
@@ -165,7 +181,6 @@ function test_item_parse_page() {
                             callback(err, { 'items': itemsList, 'jsonObject': itemObject.returnItemAttributes() });
                         }
                     });
-
                 });
             }
         }
@@ -178,44 +193,4 @@ function test_item_parse_page() {
         }
     });
 
-
-    /*MODEL('items_list').schema.find(function(err, itemsList) {
-
-        if (self.get['link'] && self.get['config_file']) {
-
-            
-            var itemConfigFile = new ItemConfig(self.get['config_file']);
-            
-            itemConfigFile.getConfigFile(function(err, configFile) {
-                var file = new File();
-            
-
-                file.getFile('./item_page_saved/' + self.get['config_file'] + '.html', function(err, pageFile) {
-                    if (pageFile) {
-                        var itemObject = new ItemHandler(configFile['item_fields'], pageFile);
-                        itemObject.getItemAttributes();
-
-                        self.view('/admin/item_parse', { 'items': itemsList, 'jsonObject': itemObject.returnItemAttributes() });
-                    } else {
-                        parserModule.getPageContent(self.get['link'], function(err, page) {
-
-                            file.saveFile('./item_page_saved/', self.get['config_file'] + '.html', page, function() {
-
-                                if (err || !page) {
-                                    self.json({ 'status': 'fail' });
-                                } else {
-                                    var itemObject = new ItemHandler(configFile['item_fields'], page);
-                                    itemObject.getItemAttributes();
-
-                                    self.view('/admin/item_parse', { 'items': itemsList, 'jsonObject': itemObject.returnItemAttributes() });
-                                }
-                            });
-
-                        });
-                    }
-                });
-            });
-
-        } else self.view('/admin/item_parse', { 'items': itemsList, 'jsonObject': {} });
-    });*/
 }
